@@ -1,1 +1,4 @@
-# Smart-crypto-bot
+ccxt
+pandas
+numpy
+requests
