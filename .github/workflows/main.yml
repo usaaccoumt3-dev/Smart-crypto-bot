@@ -1,0 +1,32 @@
+name: Smart Crypto Bot
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # har 6 ghante auto-restart
+  workflow_dispatch:         # manual start button bhi
+
+permissions:
+  contents: write            # memory file save karne ke liye
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350     # ~5.5 ghante chalega phir restart
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: Run bot
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python bot.py
+        
