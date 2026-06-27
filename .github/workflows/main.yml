@@ -28,5 +28,5 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: python bot.py
+        run: python Bot.py
         
